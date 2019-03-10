@@ -1,0 +1,7 @@
+ARG_ENABLE('imagemlt', 'imagemlt support', 'no');
+
+if (PHP_IMAGEMLT != 'no') {
+	AC_DEFINE('HAVE_IMAGEMLT', 1, 'imagemlt support enabled');
+
+	EXTENSION('imagemlt', 'imagemlt.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}
